@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400" role="img" aria-label="PaperFills folded-paper F mark">
+  <rect width="400" height="400" fill="#141218"/>
+  <rect x="96" y="85" width="186" height="235" rx="28" fill="#30283e" transform="rotate(-12 200 200)"/>
+  <path d="M132 82H235L290 137V294Q290 316 268 316H132Q110 316 110 294V104Q110 82 132 82Z" fill="#b9a3f5"/>
+  <path d="M235 82V117Q235 137 255 137H290Z" fill="#e7dcff"/>
+  <path d="M150 168H248M150 216H221M150 168V270" fill="none" stroke="#21192e" stroke-width="25" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

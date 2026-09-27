@@ -1,0 +1,24 @@
+:root { color-scheme: dark; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #0c1211; color: #e5eee9; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+a { color: #bca9ff; text-underline-offset: 3px; }
+main { width: min(100% - 48px, 760px); margin: 0 auto; padding: 76px 0 48px; }
+.eyebrow { color: #79e7b7; font-size: 12px; letter-spacing: .16em; font-weight: 700; }
+h1 { font-size: clamp(36px, 7vw, 64px); letter-spacing: -.055em; line-height: 1.04; margin: 24px 0; }
+header > p { color: #8d9f95; font-size: 13px; }
+aside { margin: 36px 0; padding: 24px; border: 1px solid #294338; border-radius: 12px; background: #13231c; }
+aside strong { color: #95f4c5; }
+aside p { margin-bottom: 0; }
+section { padding: 16px 0; }
+h2 { font-size: 19px; font-weight: 600; letter-spacing: -.02em; }
+p { font-size: 15px; line-height: 1.8; color: #b3c1b9; }
+footer { border-top: 1px solid #26362e; padding-top: 28px; margin-top: 32px; color: #8d9f95; font-size: 12px; line-height: 1.8; }
+
+/* Match the PaperFills public site while preserving the policy layout. */
+:root { background: #0c0c10; color: #f3f2f7; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+.eyebrow, aside strong, a { color: #c5b6f1; }
+aside { background: #1a1722; border-color: #403851; border-radius: 20px; }
+p { color: #b8b4c2; }
+header > p, footer { color: #9994a4; }
+footer { border-color: #332e3d; }
+a:focus-visible { outline: 2px solid #c5b6f1; outline-offset: 4px; }
