@@ -83,12 +83,12 @@
 
   if (videoUrl) {
     document.getElementById('preview-action-label').firstChild.textContent = 'Watch the demo';
-    document.getElementById('preview-action-note').textContent = 'Actual Axiom and extension captures';
-    document.getElementById('preview-dialog-note').textContent = 'Motion preview made from actual product screenshots.';
-    document.getElementById('media-caption').textContent = 'Actual Axiom and extension captures, edited into a motion preview.';
-    document.querySelector('.film-status').textContent = 'MOTION PREVIEW';
+    document.getElementById('preview-action-note').textContent = 'Buy, sell, and practice across paper wallets';
+    document.getElementById('preview-dialog-note').textContent = 'Native Axiom controls. Simulated funds.';
+    document.getElementById('media-caption').textContent = 'The PaperFills launch demo: real markets, paper money.';
+    document.querySelector('.film-status').textContent = 'LAUNCH DEMO';
     document.querySelector('.play-icon use').setAttribute('href', '#icon-play');
-    document.getElementById('open-preview').setAttribute('aria-label', 'Watch PaperFills motion preview');
+    document.getElementById('open-preview').setAttribute('aria-label', 'Watch PaperFills demo video');
     if (captionsUrl) {
       const track = document.createElement('track');
       track.kind = 'captions'; track.label = 'English'; track.srclang = 'en'; track.src = captionsUrl; track.default = true;
@@ -98,7 +98,7 @@
       video.hidden = true;
       poster.hidden = false;
       document.getElementById('video-error').hidden = false;
-      document.getElementById('preview-dialog-note').textContent = 'Product screenshot. The video is temporarily unavailable.';
+      document.getElementById('preview-dialog-note').textContent = 'Launch demo temporarily unavailable. Please try again shortly.';
     });
   }
 
