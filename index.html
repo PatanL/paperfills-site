@@ -12,7 +12,7 @@
   <meta name="twitter:site" content="@paperfills" />
   <title>PaperFills — Paper trading for Axiom</title>
   <link rel="icon" type="image/svg+xml" href="media/paperfills-mark.svg" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=20260930-autoplay" />
   <link rel="preload" href="media/paperfills-launch-poster.jpg" as="image" />
 </head>
 <body data-tone="dark">
@@ -51,9 +51,10 @@
         <div class="floating-label film-label-left"><span aria-hidden="true">↗</span> Native buy &amp; sell</div>
         <div class="floating-label film-label-right"><span aria-hidden="true">◎</span> Paper wallets</div>
         <div class="film-card">
-          <div class="film-topline"><span>PAPERFILLS / INSIDE AXIOM</span><span class="film-status">LAUNCH DEMO</span></div>
+          <div class="film-topline"><span>PAPERFILLS / INSIDE AXIOM</span><div class="film-controls"><span class="film-status">LAUNCH DEMO</span><button id="inline-video-toggle" type="button" aria-controls="inline-demo-video" aria-pressed="false" hidden>Play video</button></div></div>
           <button class="film-poster" id="open-preview" type="button" aria-haspopup="dialog" aria-controls="preview-dialog" aria-label="Watch PaperFills demo video">
             <img class="product-image" src="media/paperfills-launch-poster.jpg" width="1920" height="1080" alt="PaperFills launch video frame showing Axiom's native chart and a PAPER-labelled buy control." />
+            <video class="inline-demo-video" id="inline-demo-video" muted loop playsinline preload="none" poster="media/paperfills-launch-poster.jpg" width="1920" height="1080" aria-hidden="true" tabindex="-1"></video>
             <span class="film-shade"></span>
             <span class="film-title">Your next trade.<br /><em>On paper.</em></span>
             <span class="preview-play"><span class="play-icon"><svg class="icon" aria-hidden="true"><use href="#icon-expand"/></svg></span><span id="preview-action-label">View the interface<small id="preview-action-note">Buy, sell, and practice across paper wallets</small></span></span>
@@ -94,6 +95,6 @@
   <dialog class="store-dialog" id="store-dialog" aria-labelledby="store-dialog-title"><div class="dialog-heading"><span class="dialog-label">PAPERFILLS FOR CHROME</span><button class="icon-button" data-close-dialog type="button" aria-label="Close Chrome Store information"><svg class="icon" aria-hidden="true"><use href="#icon-close"/></svg></button></div><div class="store-dialog-body"><img src="media/paperfills-mark.svg" alt="" width="72" height="72"/><h2 id="store-dialog-title">PaperFills is available.</h2><p>Install PaperFills from its published Chrome Web Store listing.</p><a class="store-button primary-store" href="https://chromewebstore.google.com/detail/paperfills-%E2%80%94-paper-tradin/oeaonmjknephhapnpopobaggildinnji" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#icon-chrome"/></svg>Visit Chrome Web Store<svg class="icon" aria-hidden="true"><use href="#icon-arrow"/></svg></a><small>Opens the official PaperFills listing.</small><a class="text-link" href="#install" id="alpha-instructions">Release updates <span aria-hidden="true">↓</span></a></div></dialog>
   <dialog class="preview-dialog" id="preview-dialog" aria-labelledby="preview-dialog-title"><div class="dialog-heading"><div><h2 id="preview-dialog-title">PaperFills, inside Axiom.</h2><p id="preview-dialog-note">Native Axiom controls. Simulated funds.</p></div><button class="icon-button" data-close-dialog type="button" aria-label="Close product preview"><svg class="icon" aria-hidden="true"><use href="#icon-close"/></svg></button></div><img id="dialog-poster" src="media/paperfills-launch-poster.jpg" width="1920" height="1080" alt="PaperFills launch video frame showing Axiom's native chart and a PAPER-labelled buy control."/><video id="demo-video" controls playsinline preload="none" poster="media/paperfills-launch-poster.jpg" width="1920" height="1080" hidden aria-label="PaperFills launch demo"></video><p id="video-error" role="status" hidden>The video could not load. The launch video thumbnail is shown instead.</p></dialog>
   <script src="site-config.js"></script>
-  <script src="app.js"></script>
+  <script src="app.js?v=20260930-autoplay"></script>
 </body>
 </html>

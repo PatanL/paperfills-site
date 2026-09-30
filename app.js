@@ -10,7 +10,13 @@
   const film = document.getElementById('film-stage');
   const video = document.getElementById('demo-video');
   const poster = document.getElementById('dialog-poster');
+  const inlineVideo = document.getElementById('inline-demo-video');
+  const inlineToggle = document.getElementById('inline-video-toggle');
   let manuallyPaused = false;
+  let inlineInView = false;
+  let inlineUserPaused = false;
+  let inlineMotionOptIn = false;
+  let inlineFailed = false;
   let frame = null;
   let dialogOpener = null;
 
@@ -40,12 +46,14 @@
     dialogOpener = opener;
     dialog.showModal();
     body.style.overflow = 'hidden';
+    updateInlinePlayback();
   }
   function afterClose() {
     video.pause();
     body.style.overflow = '';
     if (dialogOpener && document.contains(dialogOpener)) dialogOpener.focus({ preventScroll: true });
     dialogOpener = null;
+    updateInlinePlayback();
   }
   document.querySelectorAll('dialog').forEach(dialog => {
     dialog.addEventListener('close', afterClose);
@@ -82,13 +90,31 @@
   });
 
   if (videoUrl) {
-    document.getElementById('preview-action-label').firstChild.textContent = 'Watch the demo';
+    document.getElementById('preview-action-label').firstChild.textContent = 'Watch with sound';
     document.getElementById('preview-action-note').textContent = 'Buy, sell, and practice across paper wallets';
     document.getElementById('preview-dialog-note').textContent = 'Native Axiom controls. Simulated funds.';
     document.getElementById('media-caption').textContent = 'The PaperFills launch demo: real markets, paper money.';
     document.querySelector('.film-status').textContent = 'LAUNCH DEMO';
     document.querySelector('.play-icon use').setAttribute('href', '#icon-play');
     document.getElementById('open-preview').setAttribute('aria-label', 'Watch PaperFills demo video');
+    // Older cached markup can still open the full demo during deployment.
+    if (inlineVideo && inlineToggle) {
+      inlineToggle.hidden = false;
+      // Set both the default and live mute state before any media source loads.
+      inlineVideo.defaultMuted = true;
+      inlineVideo.muted = true;
+      inlineVideo.addEventListener('playing', () => {
+        document.getElementById('open-preview').classList.add('has-inline-video');
+        updateInlineButton();
+      });
+      inlineVideo.addEventListener('pause', updateInlineButton);
+      inlineVideo.addEventListener('error', () => {
+        inlineFailed = true;
+        inlineVideo.pause();
+        document.getElementById('open-preview').classList.remove('has-inline-video');
+        inlineToggle.hidden = true;
+      });
+    }
     if (captionsUrl) {
       const track = document.createElement('track');
       track.kind = 'captions'; track.label = 'English'; track.srclang = 'en'; track.src = captionsUrl; track.default = true;
@@ -109,6 +135,8 @@
       poster.hidden = true;
       video.hidden = false;
       if (!video.getAttribute('src')) video.src = videoUrl;
+      video.muted = false;
+      video.currentTime = 0;
       video.play().catch(() => {
         if (video.error) {
           video.hidden = true; poster.hidden = false;
@@ -119,11 +147,48 @@
   });
 
   function motionPaused() { return manuallyPaused || reducedMotion.matches; }
+  function updateInlineButton() {
+    if (!inlineVideo || !inlineToggle) return;
+    inlineToggle.textContent = inlineVideo.paused ? 'Play video' : 'Pause video';
+    inlineToggle.setAttribute('aria-pressed', String(!inlineVideo.paused));
+  }
+  function updateInlinePlayback() {
+    if (!videoUrl || !inlineVideo || inlineFailed) return;
+    const shouldPlay = inlineInView && !document.hidden && !inlineUserPaused
+      && (!motionPaused() || inlineMotionOptIn) && !previewDialog.open && !storeDialog.open;
+    if (shouldPlay) {
+      if (!inlineVideo.getAttribute('src')) inlineVideo.src = videoUrl;
+      inlineVideo.muted = true;
+      if (inlineVideo.paused) inlineVideo.play().catch(updateInlineButton);
+    } else {
+      inlineVideo.pause();
+    }
+    updateInlineButton();
+  }
+  inlineToggle?.addEventListener('click', () => {
+    inlineUserPaused = !inlineVideo.paused;
+    // Reduced-motion users can still explicitly choose to play the demo.
+    inlineMotionOptIn = !inlineUserPaused;
+    updateInlinePlayback();
+  });
+  if (inlineVideo && 'IntersectionObserver' in window) {
+    const videoObserver = new IntersectionObserver(entries => {
+      inlineInView = entries[0].isIntersecting && entries[0].intersectionRatio >= .25;
+      updateInlinePlayback();
+    }, { threshold: [0, .25] });
+    videoObserver.observe(inlineVideo);
+  } else {
+    // Older browsers retain an explicit, user-initiated playback control.
+    inlineInView = true;
+    inlineUserPaused = true;
+  }
   function updateMotionPreference() {
     body.classList.toggle('motion-paused', motionPaused());
     motionButton.textContent = reducedMotion.matches ? 'Reduced motion on' : (manuallyPaused ? 'Resume motion' : 'Pause motion');
     motionButton.setAttribute('aria-pressed', String(motionPaused()));
     motionButton.disabled = reducedMotion.matches;
+    inlineMotionOptIn = false;
+    updateInlinePlayback();
     updateScroll();
   }
   motionButton.addEventListener('click', () => {
@@ -166,6 +231,9 @@
     document.querySelectorAll('.reveal').forEach(element => observer.observe(element));
     document.documentElement.classList.add('motion-ready');
   }
-  document.addEventListener('visibilitychange', () => { if (document.hidden) video.pause(); });
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) video.pause();
+    updateInlinePlayback();
+  });
   updateMotionPreference();
 })();

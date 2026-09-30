@@ -81,6 +81,17 @@ h1 { font-size: clamp(68px, 8.8vw, 122px); font-weight: 500; letter-spacing: -.0
 .film-topline, .film-bottomline { display: flex; justify-content: space-between; gap: 20px; color: #c4bece; font-size: 12px; letter-spacing: .075em; padding: 17px 24px; line-height: 1.4; }
 .film-topline { border-bottom: 1px solid #ffffff12; }
 .film-status { color: #c2b1ed; }
+.film-controls { display: flex; align-items: center; gap: 14px; }
+#inline-video-toggle { border: 1px solid #ffffff2b; border-radius: 999px; padding: 6px 11px; background: #ffffff0b; color: #f1eafa; font: inherit; font-size: 12px; letter-spacing: 0; white-space: nowrap; }
+#inline-video-toggle:hover { background: #ffffff20; }
+.inline-demo-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; pointer-events: none; opacity: 0; }
+.has-inline-video .inline-demo-video { opacity: 1; }
+.has-inline-video .product-image, .has-inline-video .film-title { opacity: 0; }
+.has-inline-video .film-shade { background: linear-gradient(0deg,#080810cc,transparent 30%); }
+.has-inline-video .preview-play { bottom: 5%; padding: 10px 14px; border-radius: 999px; background: #101014d9; backdrop-filter: blur(8px); }
+.has-inline-video .preview-play small { display: none; }
+.has-inline-video .play-icon { width: 32px; height: 32px; }
+.has-inline-video .preview-play > span:last-child { font-size: 14px; }
 .film-bottomline { border-top: 1px solid #ffffff12; color: #8d879b; font-size: 12px; }
 .film-poster { position: relative; width: 100%; display: block; padding: 0; aspect-ratio: 16/9; overflow: hidden; text-align: left; background: #09090e; color: #fff; }
 .product-image { width: 100%; height: 100%; object-fit: cover; object-position: center; opacity: .6; transform: scale(1.025); transition: transform 1.2s var(--ease), opacity .7s; }
